@@ -281,3 +281,21 @@ document.getElementById('priority-filter').addEventListener('change', function (
     card.classList.toggle('is-hidden', !matches);
   });
 });
+
+// ── Clear All done tasks ─────────────────────────────
+document.getElementById('clear-done-btn').addEventListener('click', function () {
+
+  // Select all task cards currently in the Done column
+  const doneCards = document.querySelectorAll('#done .task-card');
+
+  // extract the task id
+  doneCards.forEach(function (card, index) {
+    const taskId = parseInt(card.getAttribute('data-id'), 10);
+
+    // Each card waits 100ms longer than the previous one before fading
+    // index 0 → 0ms, index 1 → 100ms, index 2 → 200ms, etc.
+    setTimeout(function () {
+      deleteTask(taskId); // deleteTask handles fade-out + remove + counter update
+    }, index * 100);
+  });
+});
