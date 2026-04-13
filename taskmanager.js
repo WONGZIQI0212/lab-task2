@@ -61,3 +61,31 @@ function createTaskCard(taskObj) {
 
   return li; // caller(addTask) insert this into DOM
 }
+
+// ── addTask(columnId, taskObj) ────────────────────────────────────────────
+function addTask(columnId, taskObj) {
+
+  // Find the <ul class="task-list"> inside the target column by its id
+  // e.g. columnId = 'todo' → selects <ul> inside <section id="todo">
+  const list = document.querySelector('#' + columnId + ' .task-list');
+
+  // Create a task card using the task data
+  const card = createTaskCard(taskObj);
+
+  // Add the new task card to the end of the list
+  list.appendChild(card);
+
+  // Add this task to the tasks array (so data stays updated)
+  tasks.push(taskObj);
+
+  // Refresh the counter badge in the header
+  updateCounter();
+}
+
+// ── updateCounter() ───────────────────────────────────────────────────────
+// Reads tasks.length (Updates the number of tasks shown in the header)
+function updateCounter() {
+  const countEl = document.getElementById('task-count');
+  // Show total tasks and add "s" if more than 1
+  countEl.textContent = tasks.length + ' task' + (tasks.length !== 1 ? 's' : '');
+}
