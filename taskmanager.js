@@ -2,6 +2,9 @@
 let tasks  = [];  // all task objects live here
 let nextId = 1;   // increments each time a new task is created
 
+let editingTaskId = null; // null = adding new task; number = editing existing
+let activeColumn  = null; // which column's Add Task button was clicked
+
 // ── createTaskCard(taskObj) ───────────────────────────────────────────────
 // Builds a complete <li> card using only DOM
 // Returns the finished <li> element
@@ -106,4 +109,24 @@ function deleteTask(taskId) {
     tasks = tasks.filter(t => t.id !== taskId);      // removes from array
     updateCounter();                                  // refresh badge=update ctr
   });
+}
+
+// ── editTask(taskId) ──────────────────────────────────────────────────────
+function editTask(taskId) {
+
+  // Find the task object in array by its id
+  const task = tasks.find(t => t.id === taskId);
+  if (!task) return;
+
+  // Store the id: use to call updateTask
+  editingTaskId = taskId;
+
+  // Pre-fill every modal field with the task's current values
+  document.getElementById('task-title').value    = task.title;
+  document.getElementById('task-desc').value     = task.description;
+  document.getElementById('task-priority').value = task.priority;
+  document.getElementById('task-due').value      = task.due;
+
+  // Show the modal by removing the hidden class
+  document.getElementById('modal').classList.remove('hidden');
 }
