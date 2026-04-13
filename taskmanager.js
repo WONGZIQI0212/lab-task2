@@ -89,3 +89,21 @@ function updateCounter() {
   // Show total tasks and add "s" if more than 1
   countEl.textContent = tasks.length + ' task' + (tasks.length !== 1 ? 's' : '');
 }
+
+// ── deleteTask(taskId) ────────────────────────────────────────────────────
+function deleteTask(taskId) {
+
+  // Find the task card <li> that has the same data-id as taskId
+  const card = document.querySelector('[data-id="' + taskId + '"]');
+  if (!card) return; // If the task is not found, stop the function
+
+  // Add fade-out class → trigger fadeOut animation
+  card.classList.add('fade-out');
+
+  // Wait for the animation to finish bfore doing anything else
+  card.addEventListener('animationend', function () {
+    card.remove();                                    // removes the task <li> from the DOM
+    tasks = tasks.filter(t => t.id !== taskId);      // removes from array
+    updateCounter();                                  // refresh badge=update ctr
+  });
+}

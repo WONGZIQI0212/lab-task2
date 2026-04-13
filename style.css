@@ -151,3 +151,12 @@ section h2 { font-size: 15px; color: #333; }
   cursor: pointer;
   background: #fff;
 }
+
+/* fadeOut: shrinks and fades the card */
+@keyframes fadeOut {
+  from { opacity: 1; transform: scale(1); }
+  to   { opacity: 0; transform: scale(0.95); }
+}
+
+/* fade-out class: trigger the animation before remove() */
+.fade-out { animation: fadeOut 0.3s ease forwards; }
