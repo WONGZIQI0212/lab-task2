@@ -130,3 +130,32 @@ function editTask(taskId) {
   // Show the modal by removing the hidden class
   document.getElementById('modal').classList.remove('hidden');
 }
+
+// ── updateTask(taskId, updatedData) ───────────────────────────────────────
+function updateTask(taskId, updatedData) {
+
+  // 1. Update the task object in memory
+  const task = tasks.find(t => t.id === taskId);
+  if (!task) return;
+  task.title       = updatedData.title;
+  task.description = updatedData.description;
+  task.priority    = updatedData.priority;
+  task.due         = updatedData.due;
+
+  // 2. Find the existing card element in the DOM
+  const card = document.querySelector('[data-id="' + taskId + '"]');
+  if (!card) return;
+
+  // 3. Update each child's textContent individually — no innerHTML
+  card.querySelector('.task-title').textContent = task.title;
+  card.querySelector('.task-desc').textContent  = task.description;
+  card.querySelector('.task-due').textContent   = task.due ? 'Due: ' + task.due : '';
+
+  // 4. Reset priority badge: remove old priority class, apply new one
+  const badge = card.querySelector('.priority-badge');
+  badge.className = 'priority-badge priority-' + task.priority; // replaces all classes
+  badge.textContent = task.priority.charAt(0).toUpperCase() + task.priority.slice(1);
+
+  // 5. Update data-priority so the filter still works after editing
+  card.setAttribute('data-priority', task.priority);
+}
