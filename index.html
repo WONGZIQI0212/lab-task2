@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>My Task Board</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- HEADER: app title + live task counter badge + priority filter dropdown -->
+  <header>
+    <h1>My Task Board</h1>
+
+    <!-- Badge: JS will update this number whenever tasks are added/removed -->
+    <span id="task-count">0 tasks</span>
+
+    <!-- Filter: changing this triggers JS to show/hide cards by priority -->
+    <select id="priority-filter">
+      <option value="all">All Priorities</option>
+      <option value="high">High</option>
+      <option value="medium">Medium</option>
+      <option value="low">Low</option>
+    </select>
+  </header>
+
+</body>
+</html>
