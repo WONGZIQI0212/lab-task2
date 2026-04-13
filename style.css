@@ -160,3 +160,6 @@ section h2 { font-size: 15px; color: #333; }
 
 /* fade-out class: trigger the animation before remove() */
 .fade-out { animation: fadeOut 0.3s ease forwards; }
+
+/* is-hidden: toggled by JS classList.toggle — hides non-matching cards during filter */
+.is-hidden { display: none; }

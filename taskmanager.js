@@ -266,3 +266,18 @@ document.querySelectorAll('.task-list').forEach(function (list) {
     if (action === 'edit')   editTask(taskId);
   });
 });
+
+
+// ── Priority filter ───────────────────────────────────────────────────────
+// Runs every time the dropdown value changes
+document.getElementById('priority-filter').addEventListener('change', function () {
+  const selected = this.value; //  all/high/medium/low
+
+  // Loop through every task card across all three columns
+  document.querySelectorAll('.task-card').forEach(function (card) {
+    const matches = selected === 'all' || card.getAttribute('data-priority') === selected;
+
+    // If “all” → show everything // otherwise → show only matching priority
+    card.classList.toggle('is-hidden', !matches);
+  });
+});
