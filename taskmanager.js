@@ -62,6 +62,41 @@ function createTaskCard(taskObj) {
   li.appendChild(dueSpan);
   li.appendChild(actions);
 
+
+  // ── Inline edit: double-click title to swap span for <input> ─────────────
+  titleSpan.addEventListener('dblclick', function () {
+
+    // make a text input with the current title
+    const input = document.createElement('input');
+    input.value = titleSpan.textContent;
+    input.classList.add('task-title'); // keep the same visual style
+
+    // swap text with the input box
+    li.replaceChild(input, titleSpan);
+    input.focus(); // immediately ready for the user to type
+
+    // commitEdit: saves the new title and swaps input back to span
+    function commitEdit() {
+      const newTitle = input.value.trim() || titleSpan.textContent; // fallback to old title if empty
+      titleSpan.textContent = newTitle;
+
+      // find correct task and sync the change into the tasks array
+      const task = tasks.find(t => t.id === taskObj.id);
+      if (task) task.title = newTitle;
+
+      li.replaceChild(titleSpan, input); // put the span back/ replace input with normal text again
+    }
+
+    // Press Enter key: commit immediately
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') commitEdit();
+    });
+
+    // Blur (click somewhere else): also commits
+    input.addEventListener('blur', commitEdit);
+  });
+
+
   return li; // caller(addTask) insert this into DOM
 }
 
