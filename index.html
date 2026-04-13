@@ -52,5 +52,42 @@
 
   </main>
 
+<!-- MODAL: hidden by default — shown when adding or editing a task -->
+  <div id="modal" class="hidden">
+    <div id="modal-content">
+      <h2 id="modal-heading">Add Task</h2>
+
+      <label>Title</label>
+      <!-- Text input: task title -->
+      <input type="text" id="task-title" placeholder="Task title" />
+
+      <label>Description</label>
+      <!-- Textarea: task description -->
+      <textarea id="task-desc" placeholder="Details..."></textarea>
+
+      <label>Priority</label>
+      <!-- Select: task priority -->
+      <select id="task-priority">
+        <option value="high">High</option>
+        <option value="medium">Medium</option>
+        <option value="low">Low</option>
+      </select>
+
+      <label>Due Date</label>
+      <!-- Date picker: due date -->
+      <input type="date" id="task-due" />
+
+      <div id="modal-actions">
+        <!-- Save: all inputs and calls addTask or updateTask -->
+        <button id="save-btn">Save</button>
+        <!-- Cancel: hides the modal without saving -->
+        <button id="cancel-btn">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Load JS last so all DOM elements above are ready when script runs -->
+  <script src="taskmanager.js"></script>
+
 </body>
 </html>
