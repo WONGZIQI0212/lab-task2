@@ -20,3 +20,52 @@ header {
   border-radius: 999px;
   font-size: 13px;
 }
+
+/* Board: 3 equal columns side by side */
+#board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  padding: 1.5rem 2rem;
+}
+
+
+section {
+  background: #fff;
+  border-radius: 10px;
+  padding: 1rem;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+section h2 { font-size: 15px; color: #333; }
+
+
+.task-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1; /* grows to fill remaining column height */
+}
+
+
+.add-task-btn {
+  background: #4f46e5;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+
+#clear-done-btn {
+  background: #dc2626;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
