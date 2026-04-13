@@ -159,3 +159,75 @@ function updateTask(taskId, updatedData) {
   // 5. Update data-priority so the filter still works after editing
   card.setAttribute('data-priority', task.priority);
 }
+
+
+// ── openModal(columnId) ───────────────────────────────────────────────────
+// open the popup to add new task
+function openModal(columnId) {
+  editingTaskId = null;     // edit=null:create a new task
+  activeColumn  = columnId; // Save will pass this to addTask
+
+  // Clear all fields so old data doesn't show
+  document.getElementById('task-title').value    = '';
+  document.getElementById('task-desc').value     = '';
+  document.getElementById('task-priority').value = 'medium';
+  document.getElementById('task-due').value      = '';
+
+  document.getElementById('modal').classList.remove('hidden'); // show modal
+}
+
+// ── closeModal() ──────────────────────────────────────────────────────────
+// close the popup
+function closeModal() {
+  document.getElementById('modal').classList.add('hidden'); // hide modal
+}
+
+// ── Save button ───────────────────────────────────────────────────────────
+document.getElementById('save-btn').addEventListener('click', function () {
+  const title = document.getElementById('task-title').value.trim(); //get the title
+  if (!title) return; // stop if title is empty
+
+// collect all input data into an object
+  const data = {
+    title:       title,
+    description: document.getElementById('task-desc').value.trim(),
+    priority:    document.getElementById('task-priority').value,
+    due:         document.getElementById('task-due').value,
+  };
+
+  if (editingTaskId !== null) {
+    updateTask(editingTaskId, data); // editing existing task
+  } else {
+    data.id = nextId++;              // assign id for new task
+    addTask(activeColumn, data);     // insert into correct column
+  }
+  closeModal(); //close popup after saving
+});
+
+// ── Cancel button ─────────────────────────────────────────────────────────
+// close popup when user click cancel
+document.getElementById('cancel-btn').addEventListener('click', closeModal);
+
+// ── Add Task buttons (event delegation on #board) ─────────────────────────
+//One listener handles all Add task buttons click
+document.getElementById('board').addEventListener('click', function (e) {
+  if (e.target.classList.contains('add-task-btn')) {
+    // data-column attribute tells: which column to add the task to
+    openModal(e.target.getAttribute('data-column'));
+  }
+});
+
+// ── Event delegation: Edit & Delete inside each column's <ul> ─────────────
+// ONE listener per list handles all button clicks inside it
+document.querySelectorAll('.task-list').forEach(function (list) {
+  list.addEventListener('click', function (e) {
+    const action = e.target.getAttribute('data-action'); // edit / delete
+    const idStr  = e.target.getAttribute('data-id');  //get task id
+    if (!action || !idStr) return; // ignore if click was not on a button
+
+    const taskId = parseInt(idStr, 10); // convert string to number
+
+    if (action === 'delete') deleteTask(taskId);
+    if (action === 'edit')   editTask(taskId);
+  });
+});
