@@ -12,8 +12,8 @@ header {
 }
 
 #task-count {
-  background: #4f46e5;
-  color: #fff;
+  background: #534AB7;       
+  color: #EEEDFE;  
   padding: 2px 10px;
   border-radius: 999px;
   font-size: 13px;
@@ -27,8 +27,8 @@ header {
   padding: 1.5rem 2rem;
 }
 
+/* --- COLUMNS --- */
 section {
-  background: #fff;
   border-radius: 10px;
   padding: 1rem;
   min-height: 400px;
@@ -36,7 +36,26 @@ section {
   flex-direction: column;
   gap: 0.75rem;
 }
-section h2 { font-size: 15px; color: #333; }
+
+#todo {             
+  background: #EEEDFE;         
+  border: 1px solid #AFA9EC;   
+}
+#inprogress {                  
+  background: #FAEEDA;        
+  border: 1px solid #FAC775;    
+}
+#done {                     
+  background: #EAF3DE;          
+  border: 1px solid #C0DD97;    
+}
+
+/* heading colours per column */
+#todo h2  { color: #3C3489; } 
+#inprogress h2 { color: #854F0B; }  
+#done h2  { color: #3B6D11; }  
+
+section h2 { font-size: 15px;}
 
 .task-list {
   list-style: none;
@@ -46,18 +65,21 @@ section h2 { font-size: 15px; color: #333; }
   flex: 1; /* grows to fill remaining column height */
 }
 
+/* buttons design */
 .add-task-btn {
-  background: #4f46e5;
   color: #fff;
   border: none;
   border-radius: 6px;
   padding: 6px 12px;
   cursor: pointer;
 }
+#todo  .add-task-btn { background: #534AB7; color: #EEEDFE; }  
+#inprogress .add-task-btn { background: #BA7517; color: #FAEEDA; }
+#done  .add-task-btn { background: #3B6D11; color: #EAF3DE; }
 
 #clear-done-btn {
-  background: #dc2626;
-  color: #fff;
+  background: #A32D2D;
+  color: #FCEBEB; 
   border: none;
   border-radius: 6px;
   padding: 6px 12px;
@@ -82,6 +104,7 @@ section h2 { font-size: 15px; color: #333; }
 #modal-content {
   background: #fff;
   border-radius: 10px;
+  border: 0.5px solid #ddd;
   padding: 1.5rem;
   width: 360px;
   display: flex;
@@ -97,13 +120,14 @@ section h2 { font-size: 15px; color: #333; }
   border: 1px solid #ccc;
   border-radius: 6px;
   font-size: 14px;
+  background: #f9f9fb;
 }
 
 #modal-actions { display: flex; gap: 0.5rem; justify-content: flex-end; }
 
 #save-btn {
-  background: #4f46e5;
-  color: #fff;
+  background: #534AB7; 
+  color: #EEEDFE;
   border: none;
   padding: 6px 16px;
   border-radius: 6px;
@@ -118,12 +142,17 @@ section h2 { font-size: 15px; color: #333; }
   cursor: pointer;
 }
 
+/* TASK CARDS*/
 .task-card {
   background: #f9f9fb;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
   padding: 0.75rem;
 }
+
+#todo  .task-card { border-left: 3px solid #7F77DD; }  
+#inprogress .task-card { border-left: 3px solid #EF9F27; }  
+#done  .task-card { border-left: 3px solid #639922; } 
 
 .task-title { font-weight: 600; font-size: 14px; cursor: pointer; }
 
@@ -138,9 +167,9 @@ section h2 { font-size: 15px; color: #333; }
   display: inline-block;
   margin-top: 6px;
 }
-.priority-high   { background: #fee2e2; color: #991b1b; } /* red tones */
-.priority-medium { background: #fef9c3; color: #92400e; } /* yellow tones */
-.priority-low    { background: #dcfce7; color: #166534; } /* green tones */
+.priority-high   { background: #fee2e2; color: #993C1D; } /* red tones */
+.priority-medium { background: #fef9c3; color: #854F0B; } /* yellow tones */
+.priority-low    { background: #dcfce7; color: #3B6D11; } /* green tones */
 
 .card-actions { display: flex; gap: 0.5rem; margin-top: 0.5rem; }
 .card-actions button {
